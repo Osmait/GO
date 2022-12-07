@@ -59,6 +59,7 @@ func NewServer(ctx context.Context, config *Config) (*Broker, error) {
 func (b *Broker) Start(binder func(s Server, r *mux.Router)) {
 	b.router = mux.NewRouter()
 	binder(b, b.router)
+
 	repo, err := database.NewPostgresRepository(b.config.DataBaseUrl)
 	if err != nil {
 		log.Fatal(err)
